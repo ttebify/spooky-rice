@@ -265,20 +265,20 @@ const IndexPage = (props: RouteComponentProps) => {
             <div className="my-10 lg:my-0 bg-[#F2F4F8] p-4 rounded-2xl">
               <h2 className="text-[#7B8BA5]">Nutritional Facts</h2>
               <BalanceTextBox
-                lable="Daily Return"
-                value="8"
+                lable="Dev fee"
+                value="2"
                 symbol="%"
                 divider
               />
-              <BalanceTextBox lable="APR" value="2920" symbol="%" divider />
-              <BalanceTextBox lable="Dev Fee" value="3" symbol="%" divider />
+              <BalanceTextBox lable="Marketing " value="0.05" symbol="%" divider />
+              <BalanceTextBox lable="Charity " value="0.5" symbol="%" divider />
             </div>
             <div className="my-10 lg:my-0 bg-[#F2F4F8] p-4 rounded-2xl text-base">
-              <h2 className="text-[#7B8BA5]">Referral Link</h2>
-              <p>
+              {/* <h2 className="text-[#7B8BA5]">Referral Link</h2> */}
+              {/* <p>
                 Earn 12% of the AVAX used to cook rice from anyone who uses your
                 referral link
-              </p>
+              </p> */}
               <CopyToClipboard
                 title="Your Referral Link"
                 content={
