@@ -39,14 +39,12 @@ const ConnectWalletButton = ({
         </Button>
       )}
       {!active && error && (
-        <button
-          className="transition-all duration-300 bg-red-600 hover:bg-white ring-red-600 ring-1
-           text-white hover:text-red-600 font-medium uppercase p-2 flex justify-center
-            items-center text-base"
+        <Button
+          className="text-red-600"
           onClick={retry}
         >
           Retry to Connect
-        </button>
+        </Button>
       )}
     </React.Fragment>
   );
