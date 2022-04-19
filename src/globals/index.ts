@@ -17,7 +17,7 @@ export const navigationItems = [
   {
     id: 4,
     title: "Spooky paper",
-    href: "/spookypaper.pdf",
+    href: "https://spookyrice.finance/spookypaper.pdf",
   },
   {
     id: 5,

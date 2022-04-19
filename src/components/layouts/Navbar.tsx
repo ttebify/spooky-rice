@@ -12,6 +12,7 @@ import cls from "classnames";
 import Link from "../Link";
 import DarkmodeSwitch from "../Tools/DarkmodeSwitch";
 import Section from "./Section";
+import RadioPlayerSwitch from "../Tools/RadioPlayerSwitch";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -41,6 +42,7 @@ export default function Navbar() {
         <SiteLogo text="Spooky Rice" />
         <div className="space-x-3">
           <DarkmodeSwitch />
+          <RadioPlayerSwitch />
           <button
             title="Menu"
             onClick={openMenu}

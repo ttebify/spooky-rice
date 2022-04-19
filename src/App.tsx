@@ -32,7 +32,7 @@ export default function App() {
                   <HomePage path="/" />
                   <BridgePage path="/bridge" />
                   <MintPage path="/mint" />
-                  <NotFound path="*" />
+                  <NotFound default />
                 </FadeTransitionRouter>
                 <Footer />
               </RefreshContextProvider>
