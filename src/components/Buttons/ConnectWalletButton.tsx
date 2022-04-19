@@ -40,7 +40,7 @@ const ConnectWalletButton = ({
       )}
       {!active && error && (
         <Button
-          className="text-red-600"
+          className="!text-red-600"
           onClick={retry}
         >
           Retry to Connect

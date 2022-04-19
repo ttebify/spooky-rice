@@ -2,7 +2,7 @@ import { BASE_BSC_SCAN_URL } from "../config";
 import getRpcUrl from "./getRpcUrl";
 
 /**
- * Prompt the user to add BSC as a network on Metamask, or switch to BSC if the wallet is on a different network
+ * Prompt the user to add Fantom as a network on Metamask, or switch to Fantom if the wallet is on a different network
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
 export const setupNetwork = async () => {
@@ -12,7 +12,7 @@ export const setupNetwork = async () => {
     try {
       if (!provider.request)
         throw new Error(
-          "Can't setup the Avalanche network on metamask because window.ethereum.request is undefined"
+          "Can't setup the Fantom Opera network on metamask because window.ethereum.request is undefined"
         );
 
       await provider.request({
@@ -38,7 +38,7 @@ export const setupNetwork = async () => {
     }
   } else {
     console.error(
-      "Can't setup the Avalanche network on metamask because window.ethereum is undefined"
+      "Can't setup the Fantom network on metamask because window.ethereum is undefined"
     );
     return false;
   }

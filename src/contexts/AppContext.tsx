@@ -52,7 +52,8 @@ export default function AppContext({
   children: React.ReactNode;
 }) {
   const [isConnecting, setIsConnecting] = useState(false);
-  const { deactivate, active, error, account, library } = useActiveWeb3React();
+  const { deactivate, active, error, account, library, setError } =
+    useActiveWeb3React();
   const { fast } = useContext(RefreshContext);
   // get wallet balance in bnb
   const [balance, setBalance] = useState("0");
@@ -61,6 +62,27 @@ export default function AppContext({
   Refetch the tokenBalances when it changes. */
   const [trigger, setTrigger] = useState(false);
   const [darkMode, setDarkmode] = useState(handleDarkMode());
+
+  useEffect(() => {
+    const checkUserNetwork = async () => {
+      const approvedChainId = process.env.REACT_APP_CHAIN_ID;
+      if (approvedChainId) {
+        library?.getNetwork().then((network) => {
+          if (network.chainId !== Number(approvedChainId)) {
+            console.error(
+              "You have connected to the wrong network. Please switch to the Fantom opera network"
+            );
+            setError(
+              new Error(
+                "You have connected to the wrong network. Please switch to the Fantom opera network"
+              )
+            );
+          }
+        });
+      }
+    };
+    checkUserNetwork();
+  }, [library, setError]);
 
   useEffect(() => {
     if (active) {

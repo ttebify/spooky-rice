@@ -203,7 +203,7 @@ const IndexPage = (props: RouteComponentProps) => {
             <h1>Spooky Rice</h1>
             <p>The Fantom (FTM) Reward Pool with the lowest Dev fees</p>
             <div
-              className="shadow my-6 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg outline-2
+              className="shadow my-10 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg outline-2
               outline-[#13B5EC] outline-offset-8 outline-double"
             >
               <div className="p-5 lg:px-0 max-w-sm mx-auto">
