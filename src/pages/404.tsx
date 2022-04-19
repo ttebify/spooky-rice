@@ -5,7 +5,7 @@ import Link from "../components/Link";
 
 const NotFoundPage = (_props: RouteComponentProps) => {
   return (
-    <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5">
+    <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5 text-center">
       <title>Not found</title>
       <h1>Page not found</h1>
       <p>
