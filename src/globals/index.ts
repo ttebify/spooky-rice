@@ -12,7 +12,7 @@ export const navigationItems = [
   {
     id: 3,
     title: "Audit Report",
-    href: "/",
+    href: "/audit-report",
   },
   {
     id: 4,
