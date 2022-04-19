@@ -7,11 +7,12 @@ import ModalProvider from "./components/Modal/ModalContext";
 import AppWalletProvider from "./contexts/AppContext";
 import { RefreshContextProvider } from "./contexts/RefreshContext";
 import HomePage from "./pages/index";
+import MintPage from "./pages/mint";
 import BridgePage from "./pages/bridge";
 import NotFound from "./pages/404";
-import { Router } from "@reach/router";
 import Footer from "./components/layouts/Footer";
 import Navbar from "./components/layouts/Navbar";
+import FadeTransitionRouter from "./pages/shared/FadeTransitionRouter";
 
 /**
  * This component is used to share state accross all sections of the site without unmounting on page
@@ -27,11 +28,12 @@ export default function App() {
             <IconContext.Provider value={{ className: "w-6 h-6" }}>
               <RefreshContextProvider>
                 <Navbar />
-                <Router>
+                <FadeTransitionRouter>
                   <HomePage path="/" />
                   <BridgePage path="/bridge" />
+                  <MintPage path="/mint" />
                   <NotFound path="*" />
-                </Router>
+                </FadeTransitionRouter>
                 <Footer />
               </RefreshContextProvider>
             </IconContext.Provider>

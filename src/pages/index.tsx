@@ -346,7 +346,7 @@ const TextInput = ({
         text-base"
       >
         <div>
-          <div className="mb-2 text-sm">Amount</div>
+          <div className="mb-2 text-sm px-1">Amount</div>
           <div className="relative">
             <div
               className="w-[80px] h-[24px] bg-white absolute bottom-2 left-0 rounded-full z-10
@@ -375,7 +375,7 @@ const TextInput = ({
           </div>
           <div
             className={cls(
-              "flex justify-between text-opacity-80 py-0.5 text-sm",
+              "flex justify-between text-opacity-80 py-0.5 px-1 text-sm",
               {
                 "text-red-400 font-normal": hasError,
               }

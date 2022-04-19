@@ -35,9 +35,9 @@ export default function Navbar() {
   return (
     <Section
       containerClass="shadow bg-white dark:bg-[#1e1d2d]"
-      className="flex w-full flex-col lg:flex-row lg:items-center lg:justify-between !py-5"
+      className="flex w-full flex-col lg:flex-row lg:items-center lg:justify-between !py-5 !max-w-screen-xl"
     >
-      <div className="flex flex-row items-center justify-between w-full">
+      <div className="flex flex-row items-center justify-between shrink-0 space-x-3">
         <SiteLogo text="Spooky Rice" />
         <div className="space-x-3">
           <DarkmodeSwitch />
@@ -55,7 +55,7 @@ export default function Navbar() {
         ref={mobileNavELement}
         className={cls(
           "fixed lg:relative w-full h-full inset-0 lg:!bg-transparent transition-all duration-200",
-          "overflow-hidden capitalize z-50 lg:z-auto flex flex-col",
+          "overflow-hidden capitalize z-50 lg:z-auto flex flex-col flex-wrap",
           "items-center border-x-8 border-[#575757] lg:border-none",
           "bg-white dark:bg-[#1e1d2d]",
           { flex: open, "hidden lg:flex lg:justify-between": !open }

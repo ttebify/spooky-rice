@@ -1,5 +1,5 @@
 import React from "react";
-import ttebLogo from "../../images/tteb-logo.jpg";
+import ttebLogo from "../../images/tteb-logo.png";
 import Section from "./Section";
 
 interface FooterProps extends React.ComponentProps<"footer"> {}
@@ -17,10 +17,8 @@ export default function Footer(_props: FooterProps) {
             <img
               src={ttebLogo}
               alt="TTEB Logo"
-              placeholder="blurred"
               width={70}
               height={40}
-              className="filter bg-blend-multiply bg-[#F2F4F8]"
             />
           </a>
         </div>

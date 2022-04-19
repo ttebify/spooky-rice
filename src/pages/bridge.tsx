@@ -5,7 +5,7 @@ import Button from "../components/Buttons";
 
 const Bridge = (_props: RouteComponentProps) => {
   return (
-    <main className="min-h-screen w-full flex flex-col justify-center items-center space-y-2">
+    <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2">
       <Helmet>
         <title>Bridge AVAX, BSC, FTM and more</title>
       </Helmet>

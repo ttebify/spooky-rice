@@ -25,6 +25,7 @@
     "ethers": "^5.5.4",
     "lodash": "^4.17.21",
     "process": "^0.11.10",
+    "reach-router-scroll-top": "^1.0.0",
     "react": "^18.0.0",
     "react-app-rewired": "^2.1.11",
     "react-dom": "^18.0.0",

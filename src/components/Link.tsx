@@ -13,7 +13,16 @@ export default function Link({
   // Use React router Link for internal links, and <a> for others
   if (isInternal) {
     return (
-      <ReactRouterLink to={to} className={cls(className)} onClick={onClick}>
+      <ReactRouterLink
+        to={to}
+        className={cls(className)}
+        onClick={onClick}
+        getProps={({ isCurrent }) =>
+          isCurrent && {
+            style: { textDecoration: "underline", color: "#13B5EC" },
+          }
+        }
+      >
         {children}
       </ReactRouterLink>
     );
