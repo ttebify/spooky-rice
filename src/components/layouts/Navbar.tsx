@@ -34,7 +34,7 @@ export default function Navbar() {
 
   return (
     <Section
-      containerClass="shadow bg-white dark:bg-[#1e1d2d]"
+      containerClass="shadow bg-[#f2f4f8] dark:bg-[#1e1d2d]"
       className="flex w-full flex-col lg:flex-row lg:items-center lg:justify-between !py-5 !max-w-screen-xl"
     >
       <div className="flex flex-row items-center justify-between shrink-0 space-x-3">
@@ -57,7 +57,7 @@ export default function Navbar() {
           "fixed lg:relative w-full h-full inset-0 lg:!bg-transparent transition-all duration-200",
           "overflow-hidden capitalize z-50 lg:z-auto flex flex-col flex-wrap",
           "items-center border-x-8 border-[#575757] lg:border-none",
-          "bg-white dark:bg-[#1e1d2d]",
+          "bg-[#f2f4f8] dark:bg-[#1e1d2d]",
           { flex: open, "hidden lg:flex lg:justify-between": !open }
         )}
       >

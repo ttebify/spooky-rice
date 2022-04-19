@@ -202,7 +202,7 @@ const IndexPage = (props: RouteComponentProps) => {
           <div className="max-w-xl lg:max-w-lg w-full mx-auto">
             <h1>Spooky Rice</h1>
             <p>The Fantom (FTM) Reward Pool with the lowest Dev fees</p>
-            <div className="shadow my-6 bg-[#F2F4F8] dark:bg-[#192339] rounded-2xl">
+            <div className="shadow my-6 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg">
               <div className="p-5 lg:px-0 max-w-sm mx-auto">
                 <BalanceTextBox
                   lable="Contract"
@@ -261,7 +261,7 @@ const IndexPage = (props: RouteComponentProps) => {
           </div>
           <div className="max-w-xl md:max-w-3xl w-full mx-auto">
             <div
-              className="my-10 md:my-0 bg-[#F2F4F8] dark:bg-[#192339] p-4 rounded-2xl flex
+              className="my-10 md:my-0 bg-[#F2F4F8] dark:bg-[#192339] p-4 rounded-lg flex
               items-center justify-between flex-col md:flex-row"
             >
               <div className="w-full max-w-sm md:max-w-xs">
@@ -273,6 +273,8 @@ const IndexPage = (props: RouteComponentProps) => {
               </div>
               <div className="w-full max-w-sm">
                 <h2 className="font-medium">Nutritional Facts</h2>
+                <BalanceTextBox lable="Daily Return" value="8" symbol="%" divider />
+                <BalanceTextBox lable="APR" value="2920" symbol="%" divider />
                 <BalanceTextBox lable="Dev fee" value="2" symbol="%" divider />
                 <BalanceTextBox
                   lable="Marketing "

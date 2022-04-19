@@ -5,7 +5,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-xl bg-white dark:bg-[#1C3455] text-gray-800 dark:text-[#E2E2E4]
+    @apply font-sans text-xl bg-[#dcdfe4] dark:bg-[#1C3455] text-gray-800 dark:text-[#E2E2E4]
       transition-all duration-100 ease-linear scroll-smooth;
   }
 
