@@ -18,6 +18,7 @@ import { isAddress } from "ethers/lib/utils";
 import { useQuery } from "../hooks";
 import lightFtmInputImage from "../images/ftm-input-image.png";
 import darkFtmInputImage from "../images/ftm-input-image-dark.png";
+import spookyRiceGif from "../images/logo.gif";
 
 const IndexPage = (props: RouteComponentProps) => {
   const [amountToPay, setAmountToPay] = useState("");
@@ -193,12 +194,12 @@ const IndexPage = (props: RouteComponentProps) => {
 
   return (
     <main
-      className="min-h-screen w-full bg-contain bg-bottom bg-no-repeat
+      className="min-h-screen w-full bg-contain bg-bottom bg-no-repeat bg-fixed
       bg-[url('../images/Lovepik_com-400594108-paddy-fields-in-autumn.png')]"
     >
       <Section className="pb-8">
-        <div className="lg:flex lg:items-center lg:justify-between mt-8">
-          <div className="max-w-xl lg:max-w-lg w-full mx-auto lg:mx-0">
+        <div className="flex flex-col items-center mt-8">
+          <div className="max-w-xl lg:max-w-lg w-full mx-auto">
             <h1>Spooky Rice</h1>
             <p>The Fantom (FTM) Reward Pool with the lowest Dev fees</p>
             <div className="shadow my-6 bg-[#F2F4F8] dark:bg-[#192339] rounded-2xl">
@@ -258,27 +259,44 @@ const IndexPage = (props: RouteComponentProps) => {
               )}
             </div>
           </div>
-          <div className="w-full max-w-xl lg:max-w-xs mx-auto lg:mx-0 space-y-3">
-            <div className="my-10 lg:my-0 bg-[#F2F4F8] dark:bg-[#192339] p-4 rounded-2xl">
-              <h2 className="font-medium">Nutritional Facts</h2>
-              <BalanceTextBox lable="Dev fee" value="2" symbol="%" divider />
-              <BalanceTextBox
-                lable="Marketing "
-                value="0.05"
-                symbol="%"
-                divider
-              />
-              <BalanceTextBox lable="Charity " value="0.5" symbol="%" divider />
-              <div className="mt-8">
-                <CopyToClipboard
-                  title="Your Referral Link"
-                  content={
-                    account == null
-                      ? "Connect your wallet to see your referral address"
-                      : `${location?.origin}/?ref=${account}`
-                  }
-                  canCopy={account != null}
+          <div className="max-w-xl md:max-w-3xl w-full mx-auto">
+            <div
+              className="my-10 md:my-0 bg-[#F2F4F8] dark:bg-[#192339] p-4 rounded-2xl flex
+              items-center justify-between flex-col md:flex-row"
+            >
+              <div className="w-full max-w-sm md:max-w-xs">
+                <img
+                  src={spookyRiceGif}
+                  alt="Animated gif of a hot served rice"
+                  className="w-full"
                 />
+              </div>
+              <div className="w-full max-w-sm">
+                <h2 className="font-medium">Nutritional Facts</h2>
+                <BalanceTextBox lable="Dev fee" value="2" symbol="%" divider />
+                <BalanceTextBox
+                  lable="Marketing "
+                  value="0.05"
+                  symbol="%"
+                  divider
+                />
+                <BalanceTextBox
+                  lable="Charity "
+                  value="0.5"
+                  symbol="%"
+                  divider
+                />
+                <div className="mt-8">
+                  <CopyToClipboard
+                    title="Your Referral Link"
+                    content={
+                      account == null
+                        ? "Connect your wallet to see your referral address"
+                        : `${location?.origin}/?ref=${account}`
+                    }
+                    canCopy={account != null}
+                  />
+                </div>
               </div>
             </div>
           </div>

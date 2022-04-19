@@ -14,8 +14,8 @@ export const BASE_BSC_SCAN_URL = BASE_BSC_SCAN_URLS[ChainId.MAINNET];
 
 export const addresses = {
   riceContract: {
-    250: "0x446BFC36541cC6b4832408Cc7E75A4e2D17CDC15",
-    97: "0xbAd87ea70A47BD09416B3a15e30BF7386115D0e4",
+    250: "0x8315dC2d724DC6842de2A9048303DeCB60F13ce1",
+    97: "",
   },
 };
 

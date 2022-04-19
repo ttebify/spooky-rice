@@ -8,7 +8,7 @@ const Mint = (_props: RouteComponentProps) => {
       <Helmet>
         <title>Spooky NFT - (comming soon)</title>
       </Helmet>
-      <h1>10,000 Spooky Rice NFT's coming soon.</h1>
+      <h1>10,000 Spooky NFT's coming soon.</h1>
       <p>
         <br />
         NFT's will be used for lottery and as special boosts on your rice yield
