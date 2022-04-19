@@ -31,8 +31,8 @@ export default function CopyToClipboard({
   }, [codeElement, canCopy]);
 
   return (
-    <div className="relative w-full my-3 border-b-2 bg-white rounded">
-      <div className="bg-[#E4E9F1] px-4 py-1 flex justify-between items-center">
+    <div className="relative w-full my-3 border-b-2 bg-white dark:bg-[#192339]  rounded-t-xl">
+      <div className="bg-[#E4E9F1] dark:bg-[#556C8A] px-4 py-1 flex justify-between items-center rounded-t-xl">
         <div className="inline-block text-sm">{title}</div>
         {canCopy && (
           <button

@@ -16,7 +16,8 @@ import { getFullDisplayBalance } from "../utils/formatBalance";
 import { RouteComponentProps } from "@reach/router";
 import { isAddress } from "ethers/lib/utils";
 import { useQuery } from "../hooks";
-import ftmInputImage from "../images/ftm-input-image.png";
+import lightFtmInputImage from "../images/ftm-input-image.png";
+import darkFtmInputImage from "../images/ftm-input-image-dark.png";
 
 const IndexPage = (props: RouteComponentProps) => {
   const [amountToPay, setAmountToPay] = useState("");
@@ -188,22 +189,19 @@ const IndexPage = (props: RouteComponentProps) => {
     }
   }, [library, toastError, triggerFetchTokens, toastSuccess]);
 
-  // Can start video
-  /* const canStart = useCallback(
-    () => Number.parseFloat(riceBal) > 0,
-    [riceBal, account, active, library]
-  ); */
-
   const { location } = props; // Page props
 
   return (
-    <main className="min-h-screen w-full bg-contain bg-bottom bg-no-repeat
-      bg-[url('../images/Lovepik_com-400594108-paddy-fields-in-autumn.png')]">
+    <main
+      className="min-h-screen w-full bg-contain bg-bottom bg-no-repeat
+      bg-[url('../images/Lovepik_com-400594108-paddy-fields-in-autumn.png')]"
+    >
       <Section className="pb-8">
         <div className="lg:flex lg:items-center lg:justify-between mt-8">
           <div className="max-w-xl lg:max-w-lg w-full mx-auto lg:mx-0">
+            <h1>Spooky Rice</h1>
             <p>The Fantom (FTM) Reward Pool with the lowest Dev fees</p>
-            <div className="shadow my-6 bg-[#F2F4F8] rounded-2xl">
+            <div className="shadow my-6 bg-[#F2F4F8] dark:bg-[#192339] rounded-2xl">
               <div className="p-5 lg:px-0 max-w-sm mx-auto">
                 <BalanceTextBox
                   lable="Contract"
@@ -220,7 +218,6 @@ const IndexPage = (props: RouteComponentProps) => {
                       value={amountToPay}
                       onSubmit={handleCookRice}
                       trx={cooking}
-                      walletBal={balance}
                       isDisabled={
                         cooking ||
                         errorMsg.length > 0 ||
@@ -254,7 +251,7 @@ const IndexPage = (props: RouteComponentProps) => {
                 </React.Fragment>
               )}
               {!active && (
-                <div className="py-2 text-xs text-center bg-white flex flex-col items-center space-y-3">
+                <div className="py-2 text-xs text-center bg-white dark:bg-[#556C8A] flex flex-col items-center space-y-3">
                   <p>Please connect your wallet first</p>
                   <ConnectWalletButton />
                 </div>
@@ -262,32 +259,27 @@ const IndexPage = (props: RouteComponentProps) => {
             </div>
           </div>
           <div className="w-full max-w-xl lg:max-w-xs mx-auto lg:mx-0 space-y-3">
-            <div className="my-10 lg:my-0 bg-[#F2F4F8] p-4 rounded-2xl">
-              <h2 className="text-[#7B8BA5]">Nutritional Facts</h2>
+            <div className="my-10 lg:my-0 bg-[#F2F4F8] dark:bg-[#192339] p-4 rounded-2xl">
+              <h2 className="font-medium">Nutritional Facts</h2>
+              <BalanceTextBox lable="Dev fee" value="2" symbol="%" divider />
               <BalanceTextBox
-                lable="Dev fee"
-                value="2"
+                lable="Marketing "
+                value="0.05"
                 symbol="%"
                 divider
               />
-              <BalanceTextBox lable="Marketing " value="0.05" symbol="%" divider />
               <BalanceTextBox lable="Charity " value="0.5" symbol="%" divider />
-            </div>
-            <div className="my-10 lg:my-0 bg-[#F2F4F8] p-4 rounded-2xl text-base">
-              {/* <h2 className="text-[#7B8BA5]">Referral Link</h2> */}
-              {/* <p>
-                Earn 12% of the AVAX used to cook rice from anyone who uses your
-                referral link
-              </p> */}
-              <CopyToClipboard
-                title="Your Referral Link"
-                content={
-                  account == null
-                    ? "Connect your wallet to see your referral address"
-                    : `${location?.origin}/?ref=${account}`
-                }
-                canCopy={account != null}
-              />
+              <div className="mt-8">
+                <CopyToClipboard
+                  title="Your Referral Link"
+                  content={
+                    account == null
+                      ? "Connect your wallet to see your referral address"
+                      : `${location?.origin}/?ref=${account}`
+                  }
+                  canCopy={account != null}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -310,11 +302,11 @@ const BalanceTextBox = (props: BalanceTextBoxProps) => {
         "!flex-row items-center space-x-2 !my-1": props.divider,
       })}
     >
-      <div className="text-[#6c7c97]">{props.lable}</div>
+      <div className="text-[#575757] dark:text-[#E2E2E4]">{props.lable}</div>
       {props.divider && <div className="h-[1px] w-1/3 sm:w-20 bg-[#A2A5AB]" />}
       <div
-        className={cls("text-[#575757]", {
-          "text-xl font-medium !text-[#5b6a81] !-mt-0.5": !props.divider,
+        className={cls("text-[#575757] dark:text-[#E2E2E4]", {
+          "text-xl font-medium text-[#5b6a81] !-mt-0.5": !props.divider,
         })}
       >
         {props.value}{" "}
@@ -331,7 +323,6 @@ interface TextInputProps {
   value: string;
   isDisabled: boolean;
   trx: boolean; // transaction
-  walletBal: string;
 }
 
 const TextInput = ({
@@ -341,26 +332,36 @@ const TextInput = ({
   value,
   isDisabled,
   trx,
-  walletBal,
 }: TextInputProps) => {
   const hasError = errorMsg.length > 0;
+  const {
+    darkMode,
+    wallet: { balance },
+  } = useAppContext();
   return (
     <div>
       <div
-        className="max-w-sm w-full space-y-2 mx-auto p-2 rounded-md bg-[#E4E9F1] shadow-inner
-      shadow-[#D5DBE5] text-[#617086] text-base"
+        className="max-w-sm w-full space-y-2 mx-auto p-2 rounded-md bg-[#E4E9F1] dark:bg-[#121122]
+        shadow-inner shadow-[#D5DBE5] dark:shadow-[#121122] text-[#617086] dark:text-[#E2E2E4]
+        text-base"
       >
         <div>
           <div className="mb-2 text-sm">Amount</div>
           <div className="relative">
-            <div className="w-[80px] h-[24px] bg-white absolute bottom-2 left-0 rounded-full z-10
-              shadow-md">
-                <img src={ftmInputImage} alt="" className="w-full h-full" />
-              </div>
+            <div
+              className="w-[80px] h-[24px] bg-white absolute bottom-2 left-0 rounded-full z-10
+              shadow-md"
+            >
+              <img
+                src={darkMode ? darkFtmInputImage : lightFtmInputImage}
+                alt=""
+                className="w-full h-full"
+              />
+            </div>
             <input
               type="text"
               className={cls(
-                "placeholder-gray-400 outline-none border-b-2 border-[#7B8BA5] font-bold",
+                "placeholder-gray-400 outline-none border-b border-[#7B8BA5] font-bold",
                 "transition-all duration-200 text-[#7B8BA5] p-1 disabled:opacity-70 text-xl",
                 "disabled:cursor-not-allowed block w-full bg-transparent text-right leading-none",
                 {
@@ -373,12 +374,15 @@ const TextInput = ({
             />
           </div>
           <div
-            className={cls("flex justify-between text-opacity-80 py-0.5 text-sm", {
-              "text-red-400 font-normal": hasError,
-            })}
+            className={cls(
+              "flex justify-between text-opacity-80 py-0.5 text-sm",
+              {
+                "text-red-400 font-normal": hasError,
+              }
+            )}
           >
             <span>Balance</span>
-            <span>{hasError ? errorMsg : walletBal}</span>
+            <span>{hasError ? errorMsg : balance}</span>
           </div>
         </div>
       </div>

@@ -6,10 +6,10 @@ interface FooterProps extends React.ComponentProps<"footer"> {}
 
 export default function Footer(_props: FooterProps) {
   return (
-    <Section containerClass="bg-[#F2F4F8]">
+    <Section containerClass="bg-[#F2F4F8] dark:bg-[#556C8A]">
       <footer
         className="text-center p-4 flex flex-col space-y-2 sm:flex-row sm:space-y-0 justify-between
-          items-center text-gray-700 font-medium bg-[#F2F4F8] text-base"
+          items-center font-medium text-base"
       >
         <div className="inline-flex items-center">
           <span>Audited by</span>

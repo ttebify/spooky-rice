@@ -10,6 +10,7 @@ import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import { useEagerConnect } from "../hooks/useEagerConnect";
 import { useInactiveListener } from "../hooks/useInactiveListener";
 import { BIG_TEN } from "../utils/bigNumber";
+import handleDarkMode from "../utils/handleDarkmode";
 import {
   connectorsByName,
   resetWalletConnectConnector,
@@ -24,6 +25,8 @@ export interface GlobalAppContext {
     error: Error | undefined;
     retry: () => void;
   };
+  darkMode: boolean;
+  toggleDarkmode: () => void;
   triggerFetchTokens: () => void;
 }
 
@@ -35,6 +38,8 @@ const defaultValues: GlobalAppContext = {
     error: undefined,
     retry: () => {},
   },
+  darkMode: handleDarkMode(),
+  toggleDarkmode: () => {},
   triggerFetchTokens: () => {},
 };
 
@@ -51,11 +56,11 @@ export default function AppContext({
   const { fast } = useContext(RefreshContext);
   // get wallet balance in bnb
   const [balance, setBalance] = useState("0");
-  
+
   /* A workaround, I use this state to trigger an update on this context and
   Refetch the tokenBalances when it changes. */
   const [trigger, setTrigger] = useState(false);
-  
+  const [darkMode, setDarkmode] = useState(handleDarkMode());
 
   useEffect(() => {
     if (active) {
@@ -97,6 +102,13 @@ export default function AppContext({
 
   const triggerFetchTokens = useCallback(() => setTrigger((p) => !p), []);
 
+  // Dark mode
+  const toggleDarkmode = useCallback(() => {
+    const currentMode = darkMode;
+    setDarkmode(!currentMode);
+    handleDarkMode(!currentMode);
+  }, [darkMode]);
+
   return (
     <GlobalAppContextProvider.Provider
       value={{
@@ -107,6 +119,8 @@ export default function AppContext({
           error,
           retry: handleRetry,
         },
+        darkMode,
+        toggleDarkmode,
         triggerFetchTokens,
       }}
     >

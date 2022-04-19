@@ -10,6 +10,8 @@ import SiteLogo from "../SiteLogo";
 import { navigationItems } from "../../globals";
 import cls from "classnames";
 import Link from "../Link";
+import DarkmodeSwitch from "../Tools/DarkmodeSwitch";
+import Section from "./Section";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -31,26 +33,32 @@ export default function Navbar() {
   const closeMenu = useCallback(() => setOpen(false), []);
 
   return (
-    <div className="flex w-full flex-col lg:flex-row lg:items-center lg:justify-between py-5">
-      <div className="flex flex-row items-center justify-between">
+    <Section
+      containerClass="shadow bg-white dark:bg-[#1e1d2d]"
+      className="flex w-full flex-col lg:flex-row lg:items-center lg:justify-between !py-5"
+    >
+      <div className="flex flex-row items-center justify-between w-full">
         <SiteLogo text="Spooky Rice" />
-        <button
-          title="Menu"
-          onClick={openMenu}
-          arial-label="Menu"
-          className="lg:hidden cursor-pointer border rounded-full p-2 hover:bg-gray-50 transition-colors
-            duration-150"
-        >
-          <RiBarChartHorizontalLine className="h-6 w-6" />
-        </button>
+        <div className="space-x-3">
+          <DarkmodeSwitch />
+          <button
+            title="Menu"
+            onClick={openMenu}
+            arial-label="Menu"
+            className="lg:hidden cursor-pointer ring ring-gray-300 rounded-full p-2 hover:ring-0"
+          >
+            <RiBarChartHorizontalLine className="h-6 w-6" />
+          </button>
+        </div>
       </div>
       <nav
         ref={mobileNavELement}
         className={cls(
-          "fixed lg:relative w-full h-full inset-0 bg-white lg:bg-transparent transition-all duration-200",
-          "overflow-hidden text-gray-800 capitalize z-50 lg:z-auto flex flex-col",
+          "fixed lg:relative w-full h-full inset-0 lg:!bg-transparent transition-all duration-200",
+          "overflow-hidden capitalize z-50 lg:z-auto flex flex-col",
           "items-center border-x-8 border-[#575757] lg:border-none",
-          { "flex": open, "hidden lg:flex lg:justify-between": !open }
+          "bg-white dark:bg-[#1e1d2d]",
+          { flex: open, "hidden lg:flex lg:justify-between": !open }
         )}
       >
         <button
@@ -65,7 +73,7 @@ export default function Navbar() {
             <li key={nav.id}>
               <Link
                 to={nav.href}
-                className="block text-left p-1 mb-8 lg:mb-0 hover:underline transition-colors ease-linear text-2xl
+                className="block text-left p-1 mb-8 lg:mb-0 hover:underline text-2xl
                   lg:text-lg font-semibold lg:ml-3"
                 onClick={closeMenu}
               >
@@ -75,6 +83,6 @@ export default function Navbar() {
           ))}
         </ul>
       </nav>
-    </div>
+    </Section>
   );
 }

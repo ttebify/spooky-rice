@@ -12,7 +12,6 @@ import NotFound from "./pages/404";
 import { Router } from "@reach/router";
 import Footer from "./components/layouts/Footer";
 import Navbar from "./components/layouts/Navbar";
-import Section from "./components/layouts/Section";
 
 /**
  * This component is used to share state accross all sections of the site without unmounting on page
@@ -27,9 +26,7 @@ export default function App() {
           <ModalProvider>
             <IconContext.Provider value={{ className: "w-6 h-6" }}>
               <RefreshContextProvider>
-                <Section containerClass="shadow">
-                  <Navbar />
-                </Section>
+                <Navbar />
                 <Router>
                   <HomePage path="/" />
                   <BridgePage path="/bridge" />

@@ -13,9 +13,9 @@ export default function Button({
   return (
     <button
       className={cls(
-        "rounded-full px-4 py-1.5 ring-1 bg-[#F2F4F8] ring-black shadow-md text-sm text-black",
+        "rounded-full px-4 py-1.5 ring-1 bg-[#F2F4F8] dark:bg-[#13B5EC] ring-black shadow-md text-sm text-black",
         "disabled:cursor-not-allowed disabled:opacity-40 text-center hover:shadow focus:shadow",
-        "focus-within:shadow shadow-[#A5B0C3] disabled:shadow-none",
+        "focus-within:shadow shadow-[#A5B0C3] dark:shadow-none disabled:shadow-none",
         className
       )}
       {...props}
