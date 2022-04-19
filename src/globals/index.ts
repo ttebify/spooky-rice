@@ -16,13 +16,13 @@ export const navigationItems = [
   },
   {
     id: 4,
-    title: "Contract",
-    href: "https://ftmscan.com/address/0x8315dc2d724dc6842de2a9048303decb60f13ce1",
+    title: "Spooky paper",
+    href: "/spookypaper.pdf",
   },
   {
     id: 5,
-    title: "Spooky paper",
-    href: "https://spookyrice.io/spookypaper.pdf",
+    title: "Contract",
+    href: "https://ftmscan.com/address/0x8315dc2d724dc6842de2a9048303decb60f13ce1",
   },
   {
     id: 6,

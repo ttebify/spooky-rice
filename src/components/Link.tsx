@@ -31,6 +31,7 @@ export default function Link({
     <a
       href={to.toString()}
       rel={!isInternal ? "" : "nofollow noreferrer noopener"}
+      target="_blank"
       className={cls(className)}
       onClick={onClick}
     >
