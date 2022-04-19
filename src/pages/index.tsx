@@ -265,9 +265,9 @@ const IndexPage = (props: RouteComponentProps) => {
           <div className="max-w-xl md:max-w-3xl w-full mx-auto">
             <div
               className="my-10 md:my-0 bg-[#F2F4F8] dark:bg-[#192339] p-4 rounded-lg flex
-              items-center justify-between flex-col md:flex-row"
+              items-center justify-between flex-col md:flex-row md:space-x-3"
             >
-              <div className="w-full max-w-sm md:max-w-xs">
+              <div className="w-full max-w-sm md:max-w-xs min-h-[300px] bg-white">
                 <img
                   src={spookyRiceGif}
                   alt="Animated gif of a hot served rice"

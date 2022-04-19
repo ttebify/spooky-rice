@@ -1,16 +1,14 @@
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import Helmet from "react-helmet";
-import Button from "../components/Buttons";
 
 const Bridge = (_props: RouteComponentProps) => {
   return (
-    <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2">
+    <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5">
       <Helmet>
-        <title>Bridge AVAX, BSC, FTM and more</title>
+        <title>Bridge AVAX, BSC, FTM and more - (coming soon)</title>
       </Helmet>
-      <h1>Bridge AVAX, BSC, FTM and more</h1>
-      <Button>(coming soon)</Button>
+      <h1>Bridge AVAX, BSC, FTM and more (coming soon)</h1>
     </main>
   );
 };

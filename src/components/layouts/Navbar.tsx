@@ -57,7 +57,7 @@ export default function Navbar() {
           "fixed lg:relative w-full h-full inset-0 lg:!bg-transparent transition-all duration-200",
           "overflow-hidden capitalize z-50 lg:z-auto flex flex-col flex-wrap",
           "items-center border-x-8 border-[#575757] lg:border-none",
-          "bg-[#f2f4f8] dark:bg-[#1e1d2d]",
+          "bg-[#f2f4f8] dark:bg-[#1e1d2d] p-4",
           { flex: open, "hidden lg:flex lg:justify-between": !open }
         )}
       >

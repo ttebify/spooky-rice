@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 
 const Mint = (_props: RouteComponentProps) => {
   return (
-    <main className="min-h-screen w-full flex flex-col items-center space-y-2 pt-10">
+    <main className="min-h-screen w-full flex flex-col items-center space-y-2 pt-10 p-5">
       <Helmet>
         <title>Spooky NFT - (comming soon)</title>
       </Helmet>
