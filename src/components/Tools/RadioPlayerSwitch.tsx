@@ -67,7 +67,7 @@ export default function RadioPlayerSwitch() {
           ref={(player) => (videoRef.current = player)}
           pip={false}
           muted={mute}
-          volume={0.3}
+          volume={0.5}
           loop={true}
         />
       </div>

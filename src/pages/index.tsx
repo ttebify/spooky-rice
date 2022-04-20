@@ -194,7 +194,7 @@ const IndexPage = (props: RouteComponentProps) => {
 
   return (
     <main
-      className="min-h-screen w-full bg-contain bg-bottom bg-no-repeat bg-fixed
+      className="min-h-screen w-full bg-cover bg-bottom bg-no-repeat bg-fixed
       bg-[url('../images/Lovepik_com-400594108-paddy-fields-in-autumn.png')]"
     >
       <Section className="pb-8">
