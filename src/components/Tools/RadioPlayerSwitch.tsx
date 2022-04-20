@@ -57,11 +57,10 @@ export default function RadioPlayerSwitch() {
         ) : (
           <RiVolumeMuteFill className="h-7 w-7" />
         )}
-      </button>
-      <div className="w-0 h-0 invisible hidden pointer-events-none opacity-0 relative">
+      <div className="w-0 h-0 invisible pointer-events-none opacity-0 relative">
         <ReactPlayer
           url="https://player.vimeo.com/video/701120969"
-          className="pointer-event-none invisible hidden"
+          className="pointer-event-none invisible"
           width={0}
           height={0}
           ref={(player) => (videoRef.current = player)}
@@ -71,6 +70,7 @@ export default function RadioPlayerSwitch() {
           loop={true}
         />
       </div>
+      </button>
     </React.Fragment>
   );
 }
