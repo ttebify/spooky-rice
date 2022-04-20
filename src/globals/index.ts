@@ -12,7 +12,7 @@ export const navigationItems = [
   {
     id: 3,
     title: "Audit Report",
-    href: "/audit-report",
+    href: "https://github.com/TTEB-Finance/SmartContractAudits/blob/main/FantomOpera/SpookyRice_0x8315dC2d724DC6842de2A9048303DeCB60F13ce1.pdf",
   },
   {
     id: 4,
@@ -25,18 +25,18 @@ export const navigationItems = [
     href: "https://ftmscan.com/address/0x8315dc2d724dc6842de2a9048303decb60f13ce1",
   },
   {
-    id: 6,
-    title: "Telegram",
-    href: "https://t.me/Spookyrice",
-  },
-  {
     id: 7,
-    title: "Discord",
-    href: "https://discord.gg/UnvAwjb7Vh",
+    title: "Telegram",
+    href: "https://t.me/CookRice",
   },
   {
     id: 8,
     title: "Twitter",
-    href: "https://twitter.com/Spooky_chef1?t=evjO7L7fso1VmNsiqhOi1A&s=09"
-  }
+    href: "https://twitter.com/CookedR1ce?t=rs8PW7Mp2jK0WaMOz6GQdQ&s=09",
+  },
+  {
+    id: 6,
+    title: "Discord",
+    href: "https://discord.gg/cook3drice",
+  },
 ];
