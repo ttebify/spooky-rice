@@ -17,9 +17,9 @@ export const MoreWalletCard = (
     <button
       {...props}
       className="flex items-center text-xs flex-col h-auto justify-center mx-auto
-      w-full py-4 text-gray-600"
+      w-full py-4"
     >
-      <MoreHorizontal className="w-10 mb-1 fill-gray-700" />
+      <MoreHorizontal className="w-10 mb-1" />
       More
     </button>
   );

@@ -4,12 +4,12 @@ import Toast from "./Toast";
 import { ToastContainerProps } from "./types";
 
 const ZINDEX = 1000;
-const TOP_POSITION = 80; // Initial position from the top
+const BOTTOM_POSITION = 10; // Initial position from the top
 
 const ToastContainer: React.FC<ToastContainerProps> = ({
   toasts,
   onRemove,
-  delay = 5000,
+  delay = 60000,
   stackSpacing = 80,
 }) => {
   return (
@@ -17,7 +17,7 @@ const ToastContainer: React.FC<ToastContainerProps> = ({
       <TransitionGroup>
         {toasts.map((toast, index) => {
           const zIndex = (ZINDEX - index).toString();
-          const top = TOP_POSITION + index * stackSpacing;
+          const bottom = BOTTOM_POSITION + index * stackSpacing;
 
           return (
             <Toast
@@ -25,7 +25,7 @@ const ToastContainer: React.FC<ToastContainerProps> = ({
               toast={toast}
               onRemove={onRemove}
               delay={delay}
-              style={{ top: `${top}px`, zIndex }}
+              style={{ bottom: `${bottom}px`, zIndex }}
             />
           );
         })}

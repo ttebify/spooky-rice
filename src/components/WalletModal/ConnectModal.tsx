@@ -64,7 +64,7 @@ const ConnectModal = ({
     <div
       className="w-[90%] pb-10 max-h-[453px] py-6 outline-none max-w-xs mx-auto absolute
       left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 bg-white rounded-xl font-sans transition
-        duration-300 text-gray-800"
+        duration-300 text-gray-800 dark:bg-[#1e1d2d] dark:text-inherit"
     >
       <div className="relative text-xl font-medium text-center mt-2 mb-6 p-4">
         <div className="text-center">Connect with</div>

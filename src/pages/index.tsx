@@ -22,11 +22,11 @@ import spookyRiceGif from "../images/logo.gif";
 
 const IndexPage = (props: RouteComponentProps) => {
   const [amountToPay, setAmountToPay] = useState("");
-  const [contractBal, setContractBal] = useState("0");
-  const [riceBal, setRiceBal] = useState("0");
+  const [contractBal, setContractBal] = useState("0.0");
+  const [riceBal, setRiceBal] = useState("0.0");
   const [reCooking, setReCooking] = useState(false);
   const [cooking, setCooking] = useState(false);
-  const [avaxRewards, setAvaxRewards] = useState("0");
+  const [avaxRewards, setAvaxRewards] = useState("0.0");
   const [eating, setEating] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -52,20 +52,16 @@ const IndexPage = (props: RouteComponentProps) => {
   // Get AVAX Balance in the contract
   useEffect(() => {
     (async () => {
-      if (library) {
-        const contract = getRiceContract(library.getSigner());
+      const contract = getRiceContract();
         try {
           const { _hex } = await contract.getBalance();
           const bal = new BigNumber(_hex).div(BIG_TEN.pow(18));
           setContractBal(bal.toJSON());
         } catch (err) {
-          setContractBal("0");
+          setContractBal("0.0");
         }
-      } else {
-        setContractBal("0");
-      }
     })();
-  }, [library, riceBal, balance, avaxRewards]);
+  }, [riceBal, balance, avaxRewards]);
 
   // Get User Rice and avax rewards
   useEffect(() => {
@@ -91,12 +87,12 @@ const IndexPage = (props: RouteComponentProps) => {
           setAvaxRewards(avax);
         } catch (err) {
           console.error(err);
-          setRiceBal("0");
-          setAvaxRewards("0");
+          setRiceBal("0.0");
+          setAvaxRewards("0.0");
         }
       } else {
-        setRiceBal("0");
-        setAvaxRewards("0");
+        setRiceBal("0.0");
+        setAvaxRewards("0.0");
       }
     })();
   }, [account, library, contractBal, balance, fast, active]);

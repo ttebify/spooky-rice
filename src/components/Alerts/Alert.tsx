@@ -18,12 +18,13 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       <div
         className={clx(
           "fixed right-1/2 md:right-4 translate-x-1/2 md:translate-x-0 transition-all duration-300 flex items-center",
-          "max-w-xs md:max-w-sm mb-4 font-sans px-2 shadow-md rounded-md w-full border-l-8 bg-white",
+          "max-w-xs md:max-w-sm mb-4 font-sans px-2 shadow-md rounded-md w-full border-l-8 bg-[#f2f4f8]",
+          "border dark:bg-[#1e1d2d]",
           {
-            "text-teal-400 border-teal-400": info,
-            "text-red-400 border-red-400": error,
-            "text-green-400 border-green-400": success,
-            "text-yellow-400 border-yellow-400": warn,
+            "text-teal-500 border-teal-500": info,
+            "text-red-500 border-red-500": error,
+            "text-green-500 border-green-500": success,
+            "text-yellow-500 border-yellow-500": warn,
           }
         )}
         ref={ref}

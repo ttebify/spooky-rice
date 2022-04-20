@@ -33,7 +33,7 @@ export interface GlobalAppContext {
 const defaultValues: GlobalAppContext = {
   wallet: {
     active: false,
-    balance: "0",
+    balance: "0.0",
     isConnecting: true,
     error: undefined,
     retry: () => {},
@@ -56,7 +56,7 @@ export default function AppContext({
     useActiveWeb3React();
   const { fast } = useContext(RefreshContext);
   // get wallet balance in bnb
-  const [balance, setBalance] = useState("0");
+  const [balance, setBalance] = useState("0.0");
 
   /* A workaround, I use this state to trigger an update on this context and
   Refetch the tokenBalances when it changes. */
