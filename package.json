@@ -1,6 +1,7 @@
 {
   "name": "sppokyrice",
   "version": "0.1.0",
+  "homepage": "https://spookyrice.finance/",
   "private": true,
   "dependencies": {
     "@binance-chain/bsc-connector": "^1.0.0",

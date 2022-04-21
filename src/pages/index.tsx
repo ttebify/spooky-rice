@@ -22,11 +22,11 @@ import spookyRiceGif from "../images/logo.gif";
 
 const IndexPage = (props: RouteComponentProps) => {
   const [amountToPay, setAmountToPay] = useState("");
-  const [contractBal, setContractBal] = useState("0.0");
-  const [riceBal, setRiceBal] = useState("0.0");
+  const [contractBal, setContractBal] = useState("0");
+  const [riceBal, setRiceBal] = useState("0");
   const [reCooking, setReCooking] = useState(false);
   const [cooking, setCooking] = useState(false);
-  const [avaxRewards, setAvaxRewards] = useState("0.0");
+  const [avaxRewards, setAvaxRewards] = useState("0");
   const [eating, setEating] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -58,10 +58,10 @@ const IndexPage = (props: RouteComponentProps) => {
           const bal = new BigNumber(_hex).div(BIG_TEN.pow(18));
           setContractBal(bal.toJSON());
         } catch (err) {
-          setContractBal("0.0");
+          setContractBal("0");
         }
     })();
-  }, [riceBal, balance, avaxRewards]);
+  }, [riceBal, balance, avaxRewards, fast]);
 
   // Get User Rice and avax rewards
   useEffect(() => {
@@ -87,12 +87,12 @@ const IndexPage = (props: RouteComponentProps) => {
           setAvaxRewards(avax);
         } catch (err) {
           console.error(err);
-          setRiceBal("0.0");
-          setAvaxRewards("0.0");
+          setRiceBal("0");
+          setAvaxRewards("0");
         }
       } else {
-        setRiceBal("0.0");
-        setAvaxRewards("0.0");
+        setRiceBal("0");
+        setAvaxRewards("0");
       }
     })();
   }, [account, library, contractBal, balance, fast, active]);
@@ -226,6 +226,11 @@ const IndexPage = (props: RouteComponentProps) => {
                     />
                   </div>
                   <div className="p-5 lg:px-0 max-w-sm mx-auto">
+                    <BalanceTextBox
+                      lable="Your Rice"
+                      value={riceBal}
+                      symbol="Rice"
+                    />
                     <BalanceTextBox
                       lable="Your Rewards"
                       value={avaxRewards}
@@ -392,7 +397,7 @@ const TextInput = ({
                   "text-red-400": hasError,
                 }
               )}
-              placeholder="0.0"
+              placeholder="0"
               value={value}
               onChange={onChangeHandler}
             />

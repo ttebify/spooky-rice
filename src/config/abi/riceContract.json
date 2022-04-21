@@ -106,19 +106,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "contract IBEP20",
-        "name": "tokenAddress",
-        "type": "address"
-      }
-    ],
-    "name": "recoverWrongTokens",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
