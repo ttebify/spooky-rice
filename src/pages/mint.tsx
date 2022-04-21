@@ -1,7 +1,6 @@
 import { RouteComponentProps } from "@reach/router";
 import React from "react";
 import Helmet from "react-helmet";
-import Button from "../components/Buttons";
 
 const Mint = (_props: RouteComponentProps) => {
   return (
@@ -16,7 +15,6 @@ const Mint = (_props: RouteComponentProps) => {
       </p>
       <p>
         NFT's will be used for lottery and as special boosts on your rice yield
-        <Button className="mt-5">Mint</Button>
       </p>
     </main>
   );
