@@ -15,11 +15,6 @@ const Bridge = (_props: RouteComponentProps) => {
         <h1>Bridge AVAX, BSC, FTM and more</h1>
         <em>*This service is provided directly through Spookyswap.finance</em>
       </div>
-      <iframe
-        title="The Bridge Page From SpookySwap"
-        src="https://spookyswap.finance/bridge"
-        className="w-full h-screen"
-      ></iframe>
     </main>
   );
 };
