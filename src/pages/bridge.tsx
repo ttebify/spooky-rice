@@ -4,12 +4,22 @@ import Helmet from "react-helmet";
 
 const Bridge = (_props: RouteComponentProps) => {
   return (
-    <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5
-    bg-[url('../images/mint-page-bg.png')] bg-no-repeat bg-contain bg-center">
+    <main
+      className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5
+    bg-[url('../images/mint-page-bg.png')] bg-no-repeat bg-contain bg-center"
+    >
       <Helmet>
-        <title>Bridge AVAX, BSC, FTM and more - (coming soon)</title>
+        <title>Bridge AVAX, BSC, FTM and more</title>
       </Helmet>
-      <h1>Bridge AVAX, BSC, FTM and more (coming soon)</h1>
+      <div className="my-5">
+        <h1>Bridge AVAX, BSC, FTM and more</h1>
+        <em>*This service is provided directly through Spookyswap.finance</em>
+      </div>
+      <iframe
+        title="The Bridge Page From SpookySwap"
+        src="https://spookyswap.finance/bridge"
+        className="w-full h-screen"
+      ></iframe>
     </main>
   );
 };

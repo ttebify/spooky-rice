@@ -110,6 +110,8 @@ const IndexPage = (props: RouteComponentProps) => {
 
         if (amount.isGreaterThan(bal)) {
           setErrorMsg("Insufficient funds in your wallet");
+        } else if(amount.isGreaterThan("999")) {
+          setErrorMsg("Max. deposit is 999 FTM");
         } else {
           setErrorMsg("");
         }
