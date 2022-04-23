@@ -7,7 +7,7 @@ import Button from "../components/Buttons";
 import { reCookRice, eatRice, cookRice } from "../utils/calls";
 import useToast from "../hooks/useToast";
 import { useAppContext } from "../hooks/useAppContext";
-import CopyToClipboard from "../components/Tools/CopyToClipboard";
+// import CopyToClipboard from "../components/Tools/CopyToClipboard";
 import { getRiceContract } from "../utils/contractHelpers";
 import BigNumber from "bignumber.js";
 import { BIG_TEN } from "../utils/bigNumber";
@@ -20,7 +20,7 @@ import lightFtmInputImage from "../images/ftm-input-image.png";
 import darkFtmInputImage from "../images/ftm-input-image-dark.png";
 import spookyRiceGif from "../images/logo.gif";
 
-const IndexPage = (props: RouteComponentProps) => {
+const IndexPage = (_props: RouteComponentProps) => {
   const [amountToPay, setAmountToPay] = useState("");
   const [contractBal, setContractBal] = useState("0");
   const [riceBal, setRiceBal] = useState("0");
@@ -188,7 +188,7 @@ const IndexPage = (props: RouteComponentProps) => {
     }
   }, [library, toastError, triggerFetchTokens, toastSuccess]);
 
-  const { location } = props; // Page props
+  // const { location } = props; // Page props
 
   return (
     <main
@@ -300,7 +300,7 @@ const IndexPage = (props: RouteComponentProps) => {
                   divider
                 />
                 <div className="mt-8">
-                  <CopyToClipboard
+                  {/* <CopyToClipboard
                     title="Your Referral Link"
                     content={
                       account == null
@@ -308,7 +308,7 @@ const IndexPage = (props: RouteComponentProps) => {
                         : `${location?.origin}/?ref=${account}`
                     }
                     canCopy={account != null}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
