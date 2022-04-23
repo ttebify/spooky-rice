@@ -358,11 +358,11 @@ interface TextInputProps {
 
 const TextInput = ({
   onChangeHandler,
-  onSubmit,
+  // onSubmit,
   errorMsg,
   value,
-  isDisabled,
-  trx,
+  // isDisabled,
+  // trx,
 }: TextInputProps) => {
   const hasError = errorMsg.length > 0;
   const {
@@ -417,14 +417,14 @@ const TextInput = ({
           </div>
         </div>
       </div>
-      <Button
+      {/* <Button
         onClick={onSubmit}
         className="mt-4 !text-black"
         disabled={isDisabled}
         loading={trx}
       >
         Cook Rice
-      </Button>
+      </Button> */}
     </div>
   );
 };
