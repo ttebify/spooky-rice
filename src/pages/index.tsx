@@ -229,6 +229,11 @@ const IndexPage = (_props: RouteComponentProps) => {
                   </div> */}
                   <div className="p-5 lg:px-0 max-w-sm mx-auto">
                     <BalanceTextBox
+                      lable="Your FTM Balance"
+                      value={balance}
+                      symbol="FTM"
+                    />
+                    <BalanceTextBox
                       lable="Your Rice"
                       value={riceBal}
                       symbol="Rice"
