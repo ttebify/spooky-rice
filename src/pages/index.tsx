@@ -4,7 +4,7 @@ import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
 import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import cls from "classnames";
 import Button from "../components/Buttons";
-import { reCookRice, eatRice, cookRice } from "../utils/calls";
+import { reCookRice, eatRice, /* cookRice  */} from "../utils/calls";
 import useToast from "../hooks/useToast";
 import { useAppContext } from "../hooks/useAppContext";
 // import CopyToClipboard from "../components/Tools/CopyToClipboard";
@@ -16,19 +16,19 @@ import { getFullDisplayBalance } from "../utils/formatBalance";
 import { RouteComponentProps } from "@reach/router";
 import { isAddress } from "ethers/lib/utils";
 import { useQuery } from "../hooks";
-import lightFtmInputImage from "../images/ftm-input-image.png";
-import darkFtmInputImage from "../images/ftm-input-image-dark.png";
+// import lightFtmInputImage from "../images/ftm-input-image.png";
+// import darkFtmInputImage from "../images/ftm-input-image-dark.png";
 import spookyRiceGif from "../images/logo.gif";
 
 const IndexPage = (_props: RouteComponentProps) => {
-  const [amountToPay, setAmountToPay] = useState("");
+  // const [amountToPay, setAmountToPay] = useState("");
   const [contractBal, setContractBal] = useState("0");
   const [riceBal, setRiceBal] = useState("0");
   const [reCooking, setReCooking] = useState(false);
-  const [cooking, setCooking] = useState(false);
+  // const [cooking, setCooking] = useState(false);
   const [avaxRewards, setAvaxRewards] = useState("0");
   const [eating, setEating] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  // const [errorMsg, setErrorMsg] = useState("");
 
   const {
     wallet: { balance },
@@ -97,7 +97,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     })();
   }, [account, library, contractBal, balance, fast, active]);
 
-  const handleInputChange: React.FormEventHandler<HTMLInputElement> =
+  /* const handleInputChange: React.FormEventHandler<HTMLInputElement> =
     useCallback(
       async (e) => {
         const val = e.currentTarget.value.replace(/,/g, ".");
@@ -118,7 +118,7 @@ const IndexPage = (_props: RouteComponentProps) => {
         setAmountToPay(val);
       },
       [balance]
-    );
+    ); */
 
   const handleReCookRice = useCallback(async () => {
     if (library) {
@@ -139,7 +139,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     }
   }, [library, refAddress, toastError, triggerFetchTokens, toastSuccess]);
 
-  const handleCookRice = useCallback(async () => {
+  /* const handleCookRice = useCallback(async () => {
     if (library) {
       setCooking(true);
       try {
@@ -167,7 +167,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     toastSuccess,
     toastError,
     triggerFetchTokens,
-  ]);
+  ]); */
 
   const handleEatRice = useCallback(async () => {
     if (library) {
@@ -213,7 +213,7 @@ const IndexPage = (_props: RouteComponentProps) => {
               </div>
               {active && (
                 <React.Fragment>
-                  <div className="px-2 lg:px-0 max-w-sm mx-auto">
+{/*                   <div className="px-2 lg:px-0 max-w-sm mx-auto">
                     <TextInput
                       errorMsg={errorMsg}
                       onChangeHandler={handleInputChange}
@@ -226,7 +226,7 @@ const IndexPage = (_props: RouteComponentProps) => {
                         Number.isNaN(Number.parseFloat(amountToPay))
                       }
                     />
-                  </div>
+                  </div> */}
                   <div className="p-5 lg:px-0 max-w-sm mx-auto">
                     <BalanceTextBox
                       lable="Your Rice"
@@ -347,6 +347,7 @@ const BalanceTextBox = (props: BalanceTextBoxProps) => {
   );
 };
 
+/*
 interface TextInputProps {
   errorMsg: string;
   onChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -417,15 +418,15 @@ const TextInput = ({
           </div>
         </div>
       </div>
-      {/* <Button
+      <Button
         onClick={onSubmit}
         className="mt-4 !text-black"
         disabled={isDisabled}
         loading={trx}
       >
         Cook Rice
-      </Button> */}
+      </Button>
     </div>
   );
-};
+}; */
 export default IndexPage;
