@@ -4,10 +4,9 @@ import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
 import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import cls from "classnames";
 import Button from "../components/Buttons";
-import { reCookRice, eatRice, /* cookRice  */} from "../utils/calls";
+import { reCookRice, eatRice, cookRice } from "../utils/calls";
 import useToast from "../hooks/useToast";
 import { useAppContext } from "../hooks/useAppContext";
-// import CopyToClipboard from "../components/Tools/CopyToClipboard";
 import { getRiceContract } from "../utils/contractHelpers";
 import BigNumber from "bignumber.js";
 import { BIG_TEN } from "../utils/bigNumber";
@@ -16,19 +15,20 @@ import { getFullDisplayBalance } from "../utils/formatBalance";
 import { RouteComponentProps } from "@reach/router";
 import { isAddress } from "ethers/lib/utils";
 import { useQuery } from "../hooks";
-// import lightFtmInputImage from "../images/ftm-input-image.png";
-// import darkFtmInputImage from "../images/ftm-input-image-dark.png";
+import lightFtmInputImage from "../images/ftm-input-image.png";
+import darkFtmInputImage from "../images/ftm-input-image-dark.png";
 import spookyRiceGif from "../images/logo.gif";
+import CopyToClipboard from "../components/Tools/CopyToClipboard";
 
-const IndexPage = (_props: RouteComponentProps) => {
-  // const [amountToPay, setAmountToPay] = useState("");
+const IndexPage = (props: RouteComponentProps) => {
+  const [amountToPay, setAmountToPay] = useState("");
   const [contractBal, setContractBal] = useState("0");
   const [riceBal, setRiceBal] = useState("0");
   const [reCooking, setReCooking] = useState(false);
-  // const [cooking, setCooking] = useState(false);
+  const [cooking, setCooking] = useState(false);
   const [avaxRewards, setAvaxRewards] = useState("0");
   const [eating, setEating] = useState(false);
-  // const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const {
     wallet: { balance },
@@ -53,13 +53,13 @@ const IndexPage = (_props: RouteComponentProps) => {
   useEffect(() => {
     (async () => {
       const contract = getRiceContract();
-        try {
-          const { _hex } = await contract.getBalance();
-          const bal = new BigNumber(_hex).div(BIG_TEN.pow(18));
-          setContractBal(bal.toJSON());
-        } catch (err) {
-          setContractBal("0");
-        }
+      try {
+        const { _hex } = await contract.getBalance();
+        const bal = new BigNumber(_hex).div(BIG_TEN.pow(18));
+        setContractBal(bal.toJSON());
+      } catch (err) {
+        setContractBal("0");
+      }
     })();
   }, [riceBal, balance, avaxRewards, fast]);
 
@@ -97,7 +97,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     })();
   }, [account, library, contractBal, balance, fast, active]);
 
-  /* const handleInputChange: React.FormEventHandler<HTMLInputElement> =
+  const handleInputChange: React.FormEventHandler<HTMLInputElement> =
     useCallback(
       async (e) => {
         const val = e.currentTarget.value.replace(/,/g, ".");
@@ -110,7 +110,7 @@ const IndexPage = (_props: RouteComponentProps) => {
 
         if (amount.isGreaterThan(bal)) {
           setErrorMsg("Insufficient funds in your wallet");
-        } else if(amount.isGreaterThan("999")) {
+        } else if (amount.isGreaterThan("999")) {
           setErrorMsg("Max. deposit is 999 FTM");
         } else {
           setErrorMsg("");
@@ -118,7 +118,7 @@ const IndexPage = (_props: RouteComponentProps) => {
         setAmountToPay(val);
       },
       [balance]
-    ); */
+    );
 
   const handleReCookRice = useCallback(async () => {
     if (library) {
@@ -139,7 +139,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     }
   }, [library, refAddress, toastError, triggerFetchTokens, toastSuccess]);
 
-  /* const handleCookRice = useCallback(async () => {
+  const handleCookRice = useCallback(async () => {
     if (library) {
       setCooking(true);
       try {
@@ -167,7 +167,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     toastSuccess,
     toastError,
     triggerFetchTokens,
-  ]); */
+  ]);
 
   const handleEatRice = useCallback(async () => {
     if (library) {
@@ -188,7 +188,7 @@ const IndexPage = (_props: RouteComponentProps) => {
     }
   }, [library, toastError, triggerFetchTokens, toastSuccess]);
 
-  // const { location } = props; // Page props
+  const { location } = props; // Page props
 
   return (
     <main
@@ -213,7 +213,7 @@ const IndexPage = (_props: RouteComponentProps) => {
               </div>
               {active && (
                 <React.Fragment>
-{/*                   <div className="px-2 lg:px-0 max-w-sm mx-auto">
+                  <div className="px-2 lg:px-0 max-w-sm mx-auto">
                     <TextInput
                       errorMsg={errorMsg}
                       onChangeHandler={handleInputChange}
@@ -226,13 +226,8 @@ const IndexPage = (_props: RouteComponentProps) => {
                         Number.isNaN(Number.parseFloat(amountToPay))
                       }
                     />
-                  </div> */}
+                  </div>
                   <div className="p-5 lg:px-0 max-w-sm mx-auto">
-                    <BalanceTextBox
-                      lable="Your FTM Balance"
-                      value={balance}
-                      symbol="FTM"
-                    />
                     <BalanceTextBox
                       lable="Your Rice"
                       value={riceBal}
@@ -305,7 +300,7 @@ const IndexPage = (_props: RouteComponentProps) => {
                   divider
                 />
                 <div className="mt-8">
-                  {/* <CopyToClipboard
+                  <CopyToClipboard
                     title="Your Referral Link"
                     content={
                       account == null
@@ -313,7 +308,7 @@ const IndexPage = (_props: RouteComponentProps) => {
                         : `${location?.origin}/?ref=${account}`
                     }
                     canCopy={account != null}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>
@@ -352,7 +347,6 @@ const BalanceTextBox = (props: BalanceTextBoxProps) => {
   );
 };
 
-/*
 interface TextInputProps {
   errorMsg: string;
   onChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -364,11 +358,11 @@ interface TextInputProps {
 
 const TextInput = ({
   onChangeHandler,
-  // onSubmit,
+  onSubmit,
   errorMsg,
   value,
-  // isDisabled,
-  // trx,
+  isDisabled,
+  trx,
 }: TextInputProps) => {
   const hasError = errorMsg.length > 0;
   const {
@@ -433,5 +427,5 @@ const TextInput = ({
       </Button>
     </div>
   );
-}; */
+};
 export default IndexPage;

@@ -13,7 +13,6 @@ const Bridge = (_props: RouteComponentProps) => {
       </Helmet>
       <div className="my-5">
         <h1>Bridge AVAX, BSC, FTM and more</h1>
-        <em>*This service is provided directly through Spookyswap.finance</em>
       </div>
     </main>
   );
