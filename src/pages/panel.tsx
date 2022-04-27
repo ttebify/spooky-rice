@@ -1,26 +1,47 @@
 import { RouteComponentProps } from "@reach/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import Button from "../components/Buttons";
-import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
 import Section from "../components/layouts/Section";
 import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import cls from "classnames";
 import { isAddress } from "ethers/lib/utils";
 import useToast from "../hooks/useToast";
 import { getRiceContract } from "../utils/contractHelpers";
+import Link from "../components/Link";
 
 const AdminPanel = (_props: RouteComponentProps) => {
+  const [authorized, setAuthorized] = useState(false);
   const [testAddress, setTestAddress] = useState("");
   const [transporting, setTransporting] = useState(false);
   const [checking, setChecking] = useState(false);
   const [checked, setChecked] = useState(false);
   const [isBot, setIsBot] = useState(false);
-  const { active, library } = useActiveWeb3React();
   const [errorMsg, setErrorMsg] = useState("");
+
+  const { active, library, account } = useActiveWeb3React();
   const { toastInfo, toastSuccess, toastError } = useToast();
 
   // Show this for only authenticated users
+  const isJudge = useCallback(async () => {
+    if (account) {
+      try {
+        const contract = getRiceContract();
+        const auth = await contract.isAuthorized(account);
+        if (auth === true) {
+          setAuthorized(true);
+        } else {
+          setAuthorized(false);
+        }
+      } catch (error) {
+        setAuthorized(false);
+      }
+    }
+  }, [account]);
+
+  useEffect(() => {
+    isJudge();
+  }, [isJudge]);
 
   const checkIsBot = useCallback(async () => {
     setChecking(true);
@@ -44,7 +65,7 @@ const AdminPanel = (_props: RouteComponentProps) => {
     } finally {
       setChecking(false);
     }
-  }, [testAddress]);
+  }, [testAddress, toastSuccess]);
 
   const toTheUnderWorld = useCallback(async () => {
     setTransporting(true);
@@ -55,9 +76,10 @@ const AdminPanel = (_props: RouteComponentProps) => {
         const contract = getRiceContract(library.getSigner());
         const trx = await contract.setIsBot(testAddress, true);
         const receipt = await trx.wait();
-        console.log(receipt);
-
-        toastSuccess(testAddress + " is marked as bot");
+        if (receipt.status === 1) {
+          //   console.log(receipt);
+          toastSuccess(testAddress + " is marked as bot");
+        }
       } else if (!checked) {
         toastInfo(
           "Please check to see if he is a suspect first; he could be a good guy, you know?"
@@ -74,7 +96,15 @@ const AdminPanel = (_props: RouteComponentProps) => {
     } finally {
       setTransporting(false);
     }
-  }, [isBot, checked, testAddress, library, testAddress]);
+  }, [
+    isBot,
+    checked,
+    testAddress,
+    library,
+    toastError,
+    toastInfo,
+    toastSuccess,
+  ]);
   const handleInputChange: React.FormEventHandler<HTMLInputElement> =
     useCallback(async (e) => {
       const val = e.currentTarget.value;
@@ -89,21 +119,22 @@ const AdminPanel = (_props: RouteComponentProps) => {
     <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5">
       <Helmet>
         <title>
-          A Bot, is to be marked as one; We protect our community from spooked
-          players.
+          {authorized
+            ? "A Bot, is to be marked as one; We protect our community from spooked players."
+            : "Redirecting..."}
         </title>
       </Helmet>
       <Section className="pb-8">
         <div className="flex flex-col items-center mt-8">
           <div className="max-w-xl lg:max-w-lg w-full mx-auto">
-            <h1>The Panel of Judges</h1>
-            <p>
-              A Bot, is to be marked as one; We protect our community from
-              spooked players.
-            </p>
-            <div className="shadow my-10 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg">
-              {active && (
-                <React.Fragment>
+            {active && authorized ? (
+              <React.Fragment>
+                <h1>The Panel of Judges</h1>
+                <p>
+                  A Bot, is to be marked as one; We protect our community from
+                  spooked players.
+                </p>
+                <div className="shadow my-10 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg">
                   <div className="px-2 lg:px-0 max-w-sm mx-auto py-4">
                     <h2 className="mb-5 text-lg px-1 text-center">
                       The Round Table
@@ -125,19 +156,20 @@ const AdminPanel = (_props: RouteComponentProps) => {
                       transporting={transporting}
                     />
                   </div>
-                </React.Fragment>
-              )}
-              {!active && (
-                <div className="py-2 text-xs text-center bg-white dark:bg-[#556C8A] flex flex-col items-center space-y-3">
-                  <p>
-                    We assure you that there is nothing to see here; you are
-                    simply lost.
-                  </p>
-                  <p>Here is a second chance</p>
-                  <ConnectWalletButton />
                 </div>
-              )}
-            </div>
+              </React.Fragment>
+            ) : (
+              <div className="py-2 text-xs text-center bg-white dark:bg-[#556C8A] flex flex-col items-center space-y-3">
+                <p>
+                  We assure you that there is nothing to see here; you are
+                  simply lost.
+                </p>
+                <p>But here is what you can do</p>
+                <Link to="/" className="block">
+                  <Button>Go home</Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </Section>
