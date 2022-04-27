@@ -8,6 +8,7 @@ import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import cls from "classnames";
 import { isAddress } from "ethers/lib/utils";
 import useToast from "../hooks/useToast";
+import { getRiceContract } from "../utils/contractHelpers";
 
 const AdminPanel = (_props: RouteComponentProps) => {
   const [testAddress, setTestAddress] = useState("");
@@ -15,43 +16,65 @@ const AdminPanel = (_props: RouteComponentProps) => {
   const [checking, setChecking] = useState(false);
   const [checked, setChecked] = useState(false);
   const [isBot, setIsBot] = useState(false);
-  const { active /* , library, account */ } = useActiveWeb3React();
+  const { active, library } = useActiveWeb3React();
   const [errorMsg, setErrorMsg] = useState("");
-  const { toastInfo, toastSuccess } = useToast();
+  const { toastInfo, toastSuccess, toastError } = useToast();
 
   // Show this for only authenticated users
 
   const checkIsBot = useCallback(async () => {
     setChecking(true);
     // check is testAddress is valid
-    if (isAddress(testAddress)) {
-      // check bot
-      if (true) {
+    try {
+      if (isAddress(testAddress)) {
+        // check bot
+        const contract = getRiceContract();
+        const bot = await contract.isBot(testAddress);
         setChecked(true);
-      } else {
-        setChecked(false);
+        if (bot === true) {
+          setIsBot(true);
+          toastSuccess(testAddress + " has been identified as a bot.");
+        } else {
+          setIsBot(false);
+          toastSuccess(testAddress + " is not a bot.");
+        }
       }
+    } catch (error) {
+      setChecked(false);
+    } finally {
+      setChecking(false);
     }
-    setChecking(false);
   }, [testAddress]);
-  const toTheUnderWorld = async () => {
+
+  const toTheUnderWorld = useCallback(async () => {
     setTransporting(true);
-    // Please test if this user is a bot and alert that the panel is doing things wrongly
-    if (checked && isBot) {
-      // Mark as bot
-      setIsBot(true);
-      toastSuccess(testAddress + " is marked as bot");
-    } else if (!checked) {
-      toastInfo(
-        "Please check to see if he is a suspect first; he could be a good guy, you know?"
-      );
-    } else if (checked && !isBot) {
-      toastInfo(
-        "The ultimate authority, uh, could not prove that this account is a bot."
-      );
+    try {
+      // Please test if this user is a bot and alert that the panel is doing things wrongly
+      if (isAddress(testAddress) && checked && isBot && library) {
+        // Mark as bot
+        const contract = getRiceContract(library.getSigner());
+        const trx = await contract.setIsBot(testAddress, true);
+        const receipt = await trx.wait();
+        console.log(receipt);
+
+        toastSuccess(testAddress + " is marked as bot");
+      } else if (!checked) {
+        toastInfo(
+          "Please check to see if he is a suspect first; he could be a good guy, you know?"
+        );
+      } else if (checked && !isBot) {
+        toastInfo(
+          "The ultimate authority, uh, could not prove that this account is a bot."
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      toastError(`You are most likely not authorised to make this call, or something went wrong.
+      Confirm the transaction and make sure that you're paying enough gas.`);
+    } finally {
+      setTransporting(false);
     }
-    setTransporting(false);
-  };
+  }, [isBot, checked, testAddress, library, testAddress]);
   const handleInputChange: React.FormEventHandler<HTMLInputElement> =
     useCallback(async (e) => {
       const val = e.currentTarget.value;
@@ -66,8 +89,8 @@ const AdminPanel = (_props: RouteComponentProps) => {
     <main className="min-h-screen w-full flex flex-col py-10 items-center space-y-2 p-5">
       <Helmet>
         <title>
-          A Bot, is to be marked as one; We protect as spooky cat wishes -
-          Spookyrice
+          A Bot, is to be marked as one; We protect our community from spooked
+          players.
         </title>
       </Helmet>
       <Section className="pb-8">
@@ -75,8 +98,8 @@ const AdminPanel = (_props: RouteComponentProps) => {
           <div className="max-w-xl lg:max-w-lg w-full mx-auto">
             <h1>The Panel of Judges</h1>
             <p>
-              A Bot, is to be marked as one; We protect as spooky cat wishes -
-              Spookyrice
+              A Bot, is to be marked as one; We protect our community from
+              spooked players.
             </p>
             <div className="shadow my-10 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg">
               {active && (
