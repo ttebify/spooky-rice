@@ -17,7 +17,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div
         className={clx(
-          "fixed right-1/2 md:right-4 translate-x-1/2 md:translate-x-0 transition-all duration-300 flex items-center",
+          "fixed left-1/2 md:left-4 translate-x-1/2 md:translate-x-0 transition-all duration-300 flex items-center",
           "max-w-xs md:max-w-sm mb-4 font-sans px-2 shadow-md rounded-md w-full border-l-8 bg-[#f2f4f8]",
           "border dark:bg-[#1e1d2d]",
           {

@@ -8,7 +8,7 @@ import AppWalletProvider from "./contexts/AppContext";
 import { RefreshContextProvider } from "./contexts/RefreshContext";
 import HomePage from "./pages/index";
 import MintPage from "./pages/mint";
-import BridgePage from "./pages/bridge";
+import AdminPage from "./pages/panel";
 import NotFound from "./pages/404";
 import Footer from "./components/layouts/Footer";
 import Navbar from "./components/layouts/Navbar";
@@ -30,8 +30,8 @@ export default function App() {
                 <Navbar />
                 <FadeTransitionRouter>
                   <HomePage path="/" />
-                  <BridgePage path="/bridge" />
                   <MintPage path="/mint" />
+                  <AdminPage path="/~panel~~/s/invoke/spooky" />
                   <NotFound default />
                 </FadeTransitionRouter>
                 <Footer />

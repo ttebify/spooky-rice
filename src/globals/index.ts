@@ -2,7 +2,7 @@ export const navigationItems = [
   {
     id: 1,
     title: "Bridge",
-    href: "/bridge",
+    href: "https://spookyswap.finance/bridge",
   },
   {
     id: 2,
@@ -12,7 +12,7 @@ export const navigationItems = [
   {
     id: 3,
     title: "Audit Report",
-    href: "https://github.com/TTEB-Finance/SmartContractAudits/blob/main/FantomOpera/SpookyRice_0x8315dC2d724DC6842de2A9048303DeCB60F13ce1.pdf",
+    href: "https://github.com/TTEB-Finance/SmartContractAudits/blob/main/FantomOpera/TTEB%20Finance%20Audit%20Report%20for%20SpookyRice.pdf",
   },
   {
     id: 4,
