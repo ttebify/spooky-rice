@@ -19,6 +19,7 @@ import lightFtmInputImage from "../images/ftm-input-image.png";
 import darkFtmInputImage from "../images/ftm-input-image-dark.png";
 import spookyRiceGif from "../images/logo.gif";
 import CopyToClipboard from "../components/Tools/CopyToClipboard";
+import { Helmet } from "react-helmet";
 
 const IndexPage = (props: RouteComponentProps) => {
   const [amountToPay, setAmountToPay] = useState("");
@@ -195,6 +196,9 @@ const IndexPage = (props: RouteComponentProps) => {
       className="min-h-screen w-full bg-cover bg-bottom bg-no-repeat bg-fixed
       bg-[url('../images/Lovepik_com-400594108-paddy-fields-in-autumn.png')]"
     >
+      <Helmet>
+        <title>The Fantom (FTM) Reward Pool with the lowest Dev fees</title>
+      </Helmet>
       <Section className="pb-8">
         <div className="flex flex-col items-center mt-8">
           <div className="max-w-xl lg:max-w-lg w-full mx-auto">
