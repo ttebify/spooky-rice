@@ -22,7 +22,7 @@ export const navigationItems = [
   {
     id: 5,
     title: "Contract",
-    href: "https://ftmscan.com/address/0x8315dc2d724dc6842de2a9048303decb60f13ce1",
+    href: "https://ftmscan.com/address/0xcb9d3a2134c9227a860999fd6130dba0ba0e7c52",
   },
   {
     id: 7,
@@ -37,6 +37,6 @@ export const navigationItems = [
   {
     id: 6,
     title: "Discord",
-    href: "https://discord.gg/cook3drice",
+    href: "https://discord.gg/cookedrice",
   },
 ];
