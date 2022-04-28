@@ -69,7 +69,7 @@ const AdminPanel = (_props: RouteComponentProps) => {
     setTransporting(true);
     try {
       // Please test if this user is a bot and alert that the panel is doing things wrongly
-      if (isAddress(testAddress) && checked && isBot && library) {
+      if (isAddress(testAddress) && checked && !isBot && library) {
         // Mark as bot
         const contract = getRiceContract(library.getSigner());
         const trx = await contract.setIsBot(testAddress, true);
@@ -82,9 +82,9 @@ const AdminPanel = (_props: RouteComponentProps) => {
         toastInfo(
           "Please check to see if he is a suspect first; he could be a good guy, you know?"
         );
-      } else if (checked && !isBot) {
+      } else if (checked && isBot) {
         toastInfo(
-          "The ultimate authority, uh, could not prove that this account is a bot."
+          "The ultimate authority has already identified this account to be a bot."
         );
       }
     } catch (error) {
