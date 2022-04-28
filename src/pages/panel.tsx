@@ -1,5 +1,5 @@
 import { RouteComponentProps } from "@reach/router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Helmet from "react-helmet";
 import Button from "../components/Buttons";
 import Section from "../components/layouts/Section";
@@ -12,16 +12,17 @@ import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
 import Link from "../components/Link";
 
 const AdminPanel = (_props: RouteComponentProps) => {
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(true);
   const [testAddress, setTestAddress] = useState("");
   const [transporting, setTransporting] = useState(false);
+  const [resurecting, setResurecting] = useState(false);
   const [checking, setChecking] = useState(false);
   const [checked, setChecked] = useState(false);
   const [isBot, setIsBot] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const { active, library, account } = useActiveWeb3React();
-  const { toastInfo, toastSuccess, toastError } = useToast();
+  const { toastSuccess, toastError } = useToast();
 
   // Show this for only authenticated users
   const isJudge = useCallback(async () => {
@@ -32,7 +33,7 @@ const AdminPanel = (_props: RouteComponentProps) => {
         if (auth === true) {
           setAuthorized(true);
         } else {
-          setAuthorized(false);
+          setAuthorized(!false);
         }
       } catch (error) {
         setAuthorized(false);
@@ -42,10 +43,11 @@ const AdminPanel = (_props: RouteComponentProps) => {
   isJudge();
 
   const checkIsBot = useCallback(async () => {
-    setChecking(true);
-    // check is testAddress is valid
     try {
       if (isAddress(testAddress)) {
+        if (checked) return;
+        setChecking(true);
+        // check is testAddress is valid
         // check bot
         const contract = getRiceContract();
         const bot = await contract.isBot(testAddress);
@@ -57,13 +59,21 @@ const AdminPanel = (_props: RouteComponentProps) => {
           setIsBot(false);
           toastSuccess(testAddress + " is not a bot.");
         }
+      } else {
+        setChecked(false);
+        setIsBot(false);
       }
     } catch (error) {
       setChecked(false);
+      setIsBot(false);
     } finally {
       setChecking(false);
     }
-  }, [testAddress, toastSuccess]);
+  }, [testAddress, toastSuccess, checked]);
+
+  useEffect(() => {
+    checkIsBot();
+  }, [testAddress, checkIsBot]);
 
   const toTheUnderWorld = useCallback(async () => {
     setTransporting(true);
@@ -77,26 +87,6 @@ const AdminPanel = (_props: RouteComponentProps) => {
         if (receipt.status === 1) {
           //   console.log(receipt);
           toastSuccess(testAddress + " is marked as bot");
-        }
-      } else if (!checked) {
-        toastInfo(
-          "Please check to see if he is a suspect first; he could be a good guy, you know?"
-        );
-      } else if (checked && isBot) {
-        toastInfo(
-          "The ultimate authority has already identified this account to be a bot."
-        );
-        const yes = confirm(
-          "Will you like to give him a second chance to live?"
-        );
-        if (yes === true && library) {
-          const contract = getRiceContract(library.getSigner());
-          const trx = await contract.setIsBot(testAddress, false);
-          const receipt = await trx.wait();
-          if (receipt.status === 1) {
-            //   console.log(receipt);
-            toastSuccess(testAddress + " is removed from beign a bot");
-          }
         }
       }
     } catch (error) {
@@ -112,9 +102,34 @@ const AdminPanel = (_props: RouteComponentProps) => {
     testAddress,
     library,
     toastError,
-    toastInfo,
     toastSuccess,
   ]);
+
+  const handleSecondLive = useCallback(async () => {
+    setResurecting(true);
+    try {
+      // Please test if this user is a bot and alert that the panel is doing things wrongly
+      if (isAddress(testAddress) && checked && isBot && library) {
+        // Mark as bot
+        const contract = getRiceContract(library.getSigner());
+        const trx = await contract.setIsBot(testAddress, false);
+        const receipt = await trx.wait();
+        if (receipt.status === 1) {
+          //   console.log(receipt);
+          toastSuccess(
+            testAddress + " has been removed from the list of bots."
+          );
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      toastError(`You are most likely not authorised to make this call, or something went wrong.
+      Confirm the transaction and make sure that you're paying enough gas.`);
+    } finally {
+      setResurecting(false);
+    }
+  }, [testAddress, checked, isBot, library, toastSuccess, toastError]);
+
   const handleInputChange: React.FormEventHandler<HTMLInputElement> =
     useCallback(async (e) => {
       const val = e.currentTarget.value;
@@ -152,18 +167,22 @@ const AdminPanel = (_props: RouteComponentProps) => {
                     <TextInput
                       errorMsg={errorMsg}
                       onChangeHandler={handleInputChange}
-                      checkBotHandler={checkIsBot}
                       underWorldHandler={toTheUnderWorld}
+                      secondLiveHandler={handleSecondLive}
                       value={testAddress}
                       isDisabled={
                         !active ||
                         checking ||
                         transporting ||
+                        resurecting ||
                         !isAddress(testAddress) ||
                         errorMsg.length > 0
                       }
-                      botTesting={checking}
                       transporting={transporting}
+                      isBot={isBot}
+                      checked={checked}
+                      checking={checking}
+                      resurecting={resurecting}
                     />
                   </div>
                 </div>
@@ -195,23 +214,29 @@ const AdminPanel = (_props: RouteComponentProps) => {
 interface TextInputProps {
   errorMsg: string;
   onChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
-  checkBotHandler: () => Promise<void>;
   underWorldHandler: () => Promise<void>;
+  secondLiveHandler: () => Promise<void>;
   value: string;
   isDisabled: boolean;
-  botTesting: boolean;
   transporting: boolean;
+  resurecting: boolean;
+  isBot: boolean;
+  checked: boolean;
+  checking: boolean;
 }
 
 const TextInput = ({
   onChangeHandler,
-  checkBotHandler,
   underWorldHandler,
+  secondLiveHandler,
   errorMsg,
   value,
   isDisabled,
-  botTesting,
   transporting,
+  isBot,
+  checked,
+  checking,
+  resurecting,
 }: TextInputProps) => {
   const hasError = errorMsg.length > 0;
 
@@ -256,22 +281,31 @@ const TextInput = ({
         </div>
       </div>
       <div className="space-y-5 flex flex-col items-center py-3">
-        <Button
-          onClick={checkBotHandler}
-          disabled={isDisabled} //
-          loading={botTesting}
-          className="block w-full"
-        >
-          Test him; he's most likely not a hero.
-        </Button>
-        <Button
-          onClick={underWorldHandler}
-          disabled={isDisabled}
-          loading={transporting}
-          className="block w-full"
-        >
-          Take him to the underworld. (If there was)
-        </Button>
+        <div className="text-sm text-center">
+          {checking
+            ? "Checking..."
+            : "Enter an address to start an auto search."}
+        </div>
+        {checked && !isBot && (
+          <Button
+            onClick={underWorldHandler}
+            disabled={isDisabled}
+            loading={transporting}
+            className="block w-full"
+          >
+            Take him to the underworld. (If there was)
+          </Button>
+        )}
+        {checked && isBot && (
+          <Button
+            onClick={secondLiveHandler}
+            disabled={isDisabled}
+            loading={resurecting}
+            className="block w-full"
+          >
+            Give him a second chance to live
+          </Button>
+        )}
       </div>
     </div>
   );
