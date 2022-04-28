@@ -12,7 +12,7 @@ import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
 import Link from "../components/Link";
 
 const AdminPanel = (_props: RouteComponentProps) => {
-  const [authorized, setAuthorized] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
   const [testAddress, setTestAddress] = useState("");
   const [transporting, setTransporting] = useState(false);
   const [resurecting, setResurecting] = useState(false);
@@ -33,7 +33,7 @@ const AdminPanel = (_props: RouteComponentProps) => {
         if (auth === true) {
           setAuthorized(true);
         } else {
-          setAuthorized(!false);
+          setAuthorized(false);
         }
       } catch (error) {
         setAuthorized(false);
