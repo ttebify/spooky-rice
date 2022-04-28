@@ -166,9 +166,12 @@ const AdminPanel = (_props: RouteComponentProps) => {
                   simply lost.
                 </p>
                 <p>But here is what you can do</p>
-                <div className="flex justify-center">
-                  <ConnectWalletButton />
-                </div>
+                {!active && (
+                  <div className="py-2 text-xs text-center bg-white dark:bg-[#556C8A] flex flex-col items-center space-y-3">
+                    <p>Please connect your wallet first</p>
+                    <ConnectWalletButton />
+                  </div>
+                )}
                 <Link to="/" className="block">
                   <Button>Go home</Button>
                 </Link>
