@@ -86,6 +86,18 @@ const AdminPanel = (_props: RouteComponentProps) => {
         toastInfo(
           "The ultimate authority has already identified this account to be a bot."
         );
+        const yes = confirm(
+          "Will you like to give him a second chance to live?"
+        );
+        if (yes === true && library) {
+          const contract = getRiceContract(library.getSigner());
+          const trx = await contract.setIsBot(testAddress, false);
+          const receipt = await trx.wait();
+          if (receipt.status === 1) {
+            //   console.log(receipt);
+            toastSuccess(testAddress + " is removed from beign a bot");
+          }
+        }
       }
     } catch (error) {
       console.error(error);
