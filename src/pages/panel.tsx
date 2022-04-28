@@ -168,7 +168,6 @@ const AdminPanel = (_props: RouteComponentProps) => {
                 <p>But here is what you can do</p>
                 {!active && (
                   <div className="py-2 text-xs text-center bg-white dark:bg-[#556C8A] flex flex-col items-center space-y-3">
-                    <p>Please connect your wallet first</p>
                     <ConnectWalletButton />
                   </div>
                 )}
