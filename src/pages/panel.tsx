@@ -8,7 +8,7 @@ import cls from "classnames";
 import { isAddress } from "ethers/lib/utils";
 import useToast from "../hooks/useToast";
 import { getRiceContract } from "../utils/contractHelpers";
-import Link from "../components/Link";
+import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
 
 const AdminPanel = (_props: RouteComponentProps) => {
   const [authorized, setAuthorized] = useState(false);
@@ -165,9 +165,9 @@ const AdminPanel = (_props: RouteComponentProps) => {
                   simply lost.
                 </p>
                 <p>But here is what you can do</p>
-                <Link to="/" className="block">
-                  <Button>Go home</Button>
-                </Link>
+                <div className="flex justify-center">
+                  <ConnectWalletButton />
+                </div>
               </div>
             )}
           </div>
