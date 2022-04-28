@@ -12,14 +12,14 @@ export default function RadioPlayerSwitch() {
 
   const startRadio = useCallback(async () => {
     if (player !== null) {
-      getPlayer(player).play();
+      getPlayer(player)?.play();
     }
   }, [player]);
 
   const stopRadio = useCallback(async () => {
-    if (player == null) return;
+    if (player === null) return;
     const p = getPlayer(player);
-    p.pause();
+    p?.pause();
   }, [player]);
 
   // Pause or play with the mute button
@@ -57,19 +57,19 @@ export default function RadioPlayerSwitch() {
         ) : (
           <RiVolumeMuteFill className="h-7 w-7" />
         )}
-      <div className="w-0 h-0 invisible pointer-events-none opacity-0 relative">
-        <ReactPlayer
-          url="https://player.vimeo.com/video/701120969"
-          className="pointer-event-none invisible"
-          width={0}
-          height={0}
-          ref={(player) => (videoRef.current = player)}
-          pip={false}
-          muted={mute}
-          volume={0.5}
-          loop={true}
-        />
-      </div>
+        <div className="w-0 h-0 invisible pointer-events-none opacity-0 relative">
+          <ReactPlayer
+            url="https://player.vimeo.com/video/701120969"
+            className="pointer-event-none invisible"
+            width={0}
+            height={0}
+            ref={(player) => (videoRef.current = player)}
+            pip={false}
+            muted={mute}
+            volume={0.5}
+            loop={true}
+          />
+        </div>
       </button>
     </React.Fragment>
   );
