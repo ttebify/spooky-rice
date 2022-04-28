@@ -1,5 +1,5 @@
 import { RouteComponentProps } from "@reach/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Helmet from "react-helmet";
 import Button from "../components/Buttons";
 import Section from "../components/layouts/Section";
@@ -39,10 +39,7 @@ const AdminPanel = (_props: RouteComponentProps) => {
       }
     }
   }, [account]);
-
-  useEffect(() => {
-    isJudge();
-  }, [isJudge]);
+  isJudge();
 
   const checkIsBot = useCallback(async () => {
     setChecking(true);
