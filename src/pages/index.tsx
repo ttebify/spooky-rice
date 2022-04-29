@@ -290,6 +290,7 @@ const IndexPage = (props: RouteComponentProps) => {
                   divider
                 />
                 <BalanceTextBox lable="APR" value="2920" symbol="%" divider />
+                <BalanceTextBox lable="Referral Reward" value="12" symbol="%" divider />
                 <BalanceTextBox lable="Dev fee" value="2" symbol="%" divider />
                 <BalanceTextBox
                   lable="Marketing "
