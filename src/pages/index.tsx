@@ -290,7 +290,6 @@ const IndexPage = (props: RouteComponentProps) => {
                   divider
                 />
                 <BalanceTextBox lable="APR" value="2920" symbol="%" divider />
-                <BalanceTextBox lable="Referral Reward" value="12" symbol="%" divider />
                 <BalanceTextBox lable="Dev fee" value="2" symbol="%" divider />
                 <BalanceTextBox
                   lable="Marketing "
@@ -305,6 +304,10 @@ const IndexPage = (props: RouteComponentProps) => {
                   divider
                 />
                 <div className="mt-8">
+                  <div className="text-base">
+                    Earn 12% of the FTM used to cook rice from anyone who uses
+                    your referral link.
+                  </div>
                   <CopyToClipboard
                     title="Your Referral Link"
                     content={
