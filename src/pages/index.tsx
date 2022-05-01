@@ -204,9 +204,11 @@ const IndexPage = (props: RouteComponentProps) => {
           <div className="max-w-xl lg:max-w-lg w-full mx-auto">
             <h1>Spooky Rice</h1>
             <p>The Fantom (FTM) Reward Pool with the lowest Dev fees</p>
+            <p className="my-4 text-base font-light">Rule#1: You must re-cook 6 days and eat on the 7th day.
+              This means after you cook rice (deposit) You cannot eat until you recook for 6 days</p>
             <div
-              className="shadow my-10 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg outline-2
-              outline-[#13B5EC] outline-offset-8 outline-double"
+              className="shadow my-10 bg-[#F2F4F8] dark:bg-[#192339] rounded-lg ring-2
+              ring-[#13B5EC]"
             >
               <div className="p-5 lg:px-0 max-w-sm mx-auto">
                 <BalanceTextBox

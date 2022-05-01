@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { RiVolumeMuteFill, RiVolumeUpFill } from "react-icons/ri";
+// @ts-ignore
 import ReactPlayer from "react-player/vimeo";
 
 type StatePlayerRef = React.MutableRefObject<ReactPlayer>["current"];
@@ -63,6 +64,7 @@ export default function RadioPlayerSwitch() {
             className="pointer-event-none invisible"
             width={0}
             height={0}
+            //@ts-ignore
             ref={(player) => (videoRef.current = player)}
             pip={false}
             muted={mute}
